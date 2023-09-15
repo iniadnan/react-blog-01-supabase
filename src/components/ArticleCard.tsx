@@ -31,7 +31,7 @@ function ArticleCard(props: Post) {
                     />
                 </svg>
             </button>
-            <Link to="/detail" className="block">
+            <Link to={`/detail/${props.slug}`} className="block">
                 <section className="mb-2.5">
                     <h2 className="font-semibold text-lg md:text-xl text-gray-700">{props.title}</h2>
                 </section>
