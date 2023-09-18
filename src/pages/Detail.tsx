@@ -64,7 +64,7 @@ function Detail() {
                         id="text"
                         className="bg-gray-100 w-full focus:outline-none py-2 px-4 rounded"
                         rows={5}
-                        value={post.text}
+                        defaultValue={post.text}
                     ></textarea>
                 </div>
                 <div className="flex items-center justify-end gap-x-6 pr-8">
