@@ -6,13 +6,21 @@ interface Props {
     title: string
     placeholder?: string | undefined
     value?: string | undefined
+    onChangeValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function InputForm(props: Props) {
+const InputForm: React.FC<Props> = (props) => {
+
+    const { addClass, type, id, title, placeholder, name, value, onChangeValue } = props;
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        onChangeValue(event)
+    }
+
     return (
-        <div className={props.addClass}>
-            <label htmlFor={props.id} className="text-base text-gray-700 inline-block pb-2">{props.title}</label>
-            <input type={props.type} id={props.id} className="bg-gray-100 w-full focus:outline-none py-2 px-4 rounded" defaultValue={props.value} placeholder={props.placeholder} />
+        <div className={addClass}>
+            <label htmlFor={id} className="text-base text-gray-700 inline-block pb-2">{title}</label>
+            <input type={type} id={id} name={name} onChange={handleChange} className="bg-gray-100 w-full focus:outline-none py-2 px-4 rounded" defaultValue={value} placeholder={placeholder} />
         </div>
     )
 }
