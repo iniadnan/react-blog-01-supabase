@@ -9,7 +9,10 @@ interface Post {
     created_at: string
 }
 
-function ArticleCard(props: Post) {
+const ArticleCard: React.FC<Post> = (props) => {
+
+    const { title, synopsis, slug } = props;
+
     return (
         <article className="relative bg-gray-50 hover:bg-gray-100 border rounded-lg py-3 px-5">
             <button
@@ -31,12 +34,12 @@ function ArticleCard(props: Post) {
                     />
                 </svg>
             </button>
-            <Link to={`/detail/${props.slug}`} className="block">
+            <Link to={`/detail/${slug}`} className="block">
                 <section className="mb-2.5">
-                    <h2 className="font-semibold text-lg md:text-xl text-gray-700">{props.title}</h2>
+                    <h2 className="font-semibold text-lg md:text-xl text-gray-700">{title}</h2>
                 </section>
                 <div>
-                    <p className="text-sm md:text-base text-gray-700">{props.synopsis}</p>
+                    <p className="text-sm md:text-base text-gray-700">{synopsis}</p>
                 </div>
             </Link>
         </article>
