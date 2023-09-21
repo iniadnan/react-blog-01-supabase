@@ -35,6 +35,18 @@ function Home() {
         }
     }
 
+    async function deletePost(slug: string) {
+        try {
+            const { error } = await SUPABASE.from('posts').delete().eq('slug', slug)
+
+            if (error !== null) {
+                throw error
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     return (
         <>
             <Header />
@@ -42,7 +54,7 @@ function Home() {
                 <div className="container mx-auto px-5 w-full md:w-[900px] lg:w-[1200px]">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {posts.map((post) => (
-                            <ArticleCard title={post.title} text={post.text} synopsis={post.synopsis} slug={post.slug} author={post.author} created_at={post.created_at} key={post.slug} />
+                            <ArticleCard handleDelete={deletePost} title={post.title} text={post.text} synopsis={post.synopsis} slug={post.slug} author={post.author} created_at={post.created_at} key={post.slug} />
                         ))}
                     </div>
                 </div>
