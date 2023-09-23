@@ -1,6 +1,7 @@
 import SUPABASE from "../supabaseClient"
 import { useState, useEffect } from "react"
 import { useLocation, useNavigate } from 'react-router-dom';
+import Navbar from "../components/Navbar";
 import InputForm from "../components/InputForm";
 
 interface Post {
@@ -72,35 +73,41 @@ function Detail() {
         setPost(values => ({ ...values, [name]: value }))
     }
 
+    const appHandleModal = () => {
+        console.log('asd')
+    }
+
     return (
-        <main className="py-10">
-            <form id="form__modal" name="form__modal" className="py-5 w-full max-w-[800px] mx-auto">
-                <InputForm addClass="mb-5" type="text" onChangeValue={onHandleChange} name="title" id="title" title="Title" value={post.title} />
-                <InputForm addClass="mb-5" type="text" onChangeValue={onHandleChange} name="synopsis" id="synopsis" title="Synopsis" value={post.synopsis} />
-                <InputForm addClass="mb-5" type="text" onChangeValue={onHandleChange} name="slug" id="slug" title="Slug" value={post.slug} />
-                <InputForm addClass="mb-5" type="text" onChangeValue={onHandleChange} name="author" id="author" title="Author" value={post.author} />
-                <div className="mb-5">
-                    <label htmlFor="text" className="text-base text-gray-700 inline-block pb-2">Text</label>
-                    <textarea
-                        v-model="setText"
-                        name="text"
-                        id="text"
-                        className="bg-gray-100 w-full focus:outline-none py-2 px-4 rounded"
-                        rows={5}
-                        defaultValue={post.text}
-                    ></textarea>
-                </div>
-                <div className="flex items-center justify-end gap-x-6 pr-8">
-                    <button
-                        onClick={() => editPost(post.id)}
-                        type="button"
-                        className="text-base text-white py-1.5 px-4 rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium"
-                    >
-                        Update
-                    </button>
-                </div>
-            </form>
-        </main >
+        <>
+            <Navbar navHandleModal={appHandleModal} />
+            <main className="py-10">
+                <form id="form__modal" name="form__modal" className="py-5 w-full max-w-[800px] mx-auto">
+                    <InputForm addClass="mb-5" type="text" onChangeValue={onHandleChange} name="title" id="title" title="Title" value={post.title} />
+                    <InputForm addClass="mb-5" type="text" onChangeValue={onHandleChange} name="synopsis" id="synopsis" title="Synopsis" value={post.synopsis} />
+                    <InputForm addClass="mb-5" type="text" onChangeValue={onHandleChange} name="slug" id="slug" title="Slug" value={post.slug} />
+                    <InputForm addClass="mb-5" type="text" onChangeValue={onHandleChange} name="author" id="author" title="Author" value={post.author} />
+                    <div className="mb-5">
+                        <label htmlFor="text" className="text-base text-gray-700 inline-block pb-2">Text</label>
+                        <textarea
+                            name="text"
+                            id="text"
+                            className="bg-gray-100 w-full focus:outline-none py-2 px-4 rounded"
+                            rows={5}
+                            defaultValue={post.text}
+                        ></textarea>
+                    </div>
+                    <div className="flex items-center justify-end gap-x-6 pr-8">
+                        <button
+                            onClick={() => editPost(post.id)}
+                            type="button"
+                            className="text-base text-white py-1.5 px-4 rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium"
+                        >
+                            Update
+                        </button>
+                    </div>
+                </form>
+            </main>
+        </>
     )
 }
 

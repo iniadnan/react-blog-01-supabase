@@ -1,7 +1,9 @@
 import SUPABASE from "../supabaseClient"
 import { useState, useEffect } from "react"
+import Navbar from "../components/Navbar"
 import Header from "../components/Header"
 import ArticleCard from "../components/ArticleCard"
+import ModalForm from "../components/ModalForm"
 
 interface Posts {
     title: string,
@@ -14,6 +16,7 @@ interface Posts {
 
 function Home() {
     const [posts, setPosts] = useState<Posts[]>([])
+    const [isShowModal, setIsShowModal] = useState<boolean>(false)
 
     useEffect(() => {
         getPosts()
@@ -47,8 +50,13 @@ function Home() {
         }
     }
 
+    const appHandleModal = () => {
+        setIsShowModal(!isShowModal)
+    }
+
     return (
         <>
+            <Navbar navHandleModal={appHandleModal} />
             <Header />
             <main className="w-full md:pt-10 pb-10">
                 <div className="container mx-auto px-5 w-full md:w-[900px] lg:w-[1200px]">
@@ -59,6 +67,7 @@ function Home() {
                     </div>
                 </div>
             </main >
+            <ModalForm modalShow={isShowModal} />
         </>
     )
 }
