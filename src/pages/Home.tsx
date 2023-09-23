@@ -54,6 +54,10 @@ function Home() {
         setIsShowModal(!isShowModal)
     }
 
+    const cancelModal = () => {
+        setIsShowModal(!isShowModal)
+    }
+
     return (
         <>
             <Navbar navHandleModal={appHandleModal} />
@@ -67,7 +71,7 @@ function Home() {
                     </div>
                 </div>
             </main >
-            <ModalForm modalShow={isShowModal} />
+            <ModalForm modalShow={isShowModal} closeModal={cancelModal} />
         </>
     )
 }

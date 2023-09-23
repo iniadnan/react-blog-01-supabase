@@ -1,10 +1,14 @@
 import InputForm from "./InputForm"
 
-function ModalForm(props: { modalShow: boolean }) {
+function ModalForm(props: { modalShow: boolean, closeModal: () => void }) {
 
-    const { modalShow } = props;
+    const { modalShow, closeModal } = props;
 
     const onHandleChange = () => {
+    }
+
+    const closeModalWithCancel = () => {
+        closeModal()
     }
 
     return (
@@ -31,7 +35,7 @@ function ModalForm(props: { modalShow: boolean }) {
                     ></textarea>
                 </div>
                 <div className="flex items-center justify-end gap-x-6 pr-8">
-                    <button type="button" className="text-base text-gray-700">
+                    <button type="button" className="text-base text-gray-700" onClick={closeModalWithCancel}>
                         Cancel
                     </button>
                     <button
