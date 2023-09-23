@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-function Navbar(props: { navHandleModal: () => void }) {
+function Navbar(props: { navHandleModal?: () => void }) {
 
     const { navHandleModal } = props;
 

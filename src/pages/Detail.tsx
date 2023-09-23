@@ -73,13 +73,9 @@ function Detail() {
         setPost(values => ({ ...values, [name]: value }))
     }
 
-    const appHandleModal = () => {
-        console.log('asd')
-    }
-
     return (
         <>
-            <Navbar navHandleModal={appHandleModal} />
+            <Navbar />
             <main className="py-10">
                 <form id="form__modal" name="form__modal" className="py-5 w-full max-w-[800px] mx-auto">
                     <InputForm addClass="mb-5" type="text" onChangeValue={onHandleChange} name="title" id="title" title="Title" value={post.title} />
