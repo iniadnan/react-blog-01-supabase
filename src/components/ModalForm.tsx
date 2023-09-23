@@ -1,14 +1,47 @@
+import { useState } from 'react';
+import SUPABASE from "../supabaseClient"
 import InputForm from "./InputForm"
 
 function ModalForm(props: { modalShow: boolean, closeModal: () => void }) {
 
     const { modalShow, closeModal } = props;
 
-    const onHandleChange = () => {
+    const [inputs, setInputs] = useState({
+        title: "",
+        synopsis: "",
+        slug: "",
+        author: "",
+        text: ""
+    });
+
+    const onHandleChange = (event: { target: { name: string; value: string; }; }) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setInputs(values => ({ ...values, [name]: value }))
     }
 
     const closeModalWithCancel = () => {
         closeModal()
+    }
+
+    async function insertPost() {
+        try {
+            const { error } = await SUPABASE.from('posts').insert({
+                title: inputs.title,
+                synopsis: inputs.synopsis,
+                slug: inputs.slug,
+                author: inputs.author,
+                text: inputs.text
+            })
+
+            if (error !== null) {
+                throw error
+            }
+
+            closeModalWithCancel()
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     return (
@@ -29,8 +62,9 @@ function ModalForm(props: { modalShow: boolean, closeModal: () => void }) {
                         name="text"
                         id="text"
                         className="bg-gray-100 w-full focus:outline-none py-2 px-4 rounded"
-                        v-model="setText"
                         placeholder="Text"
+                        value={inputs.text || ""}
+                        onChange={onHandleChange}
                         rows={5}
                     ></textarea>
                 </div>
@@ -39,6 +73,7 @@ function ModalForm(props: { modalShow: boolean, closeModal: () => void }) {
                         Cancel
                     </button>
                     <button
+                        onClick={insertPost}
                         type="button"
                         className="text-base text-white py-1.5 px-4 rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium">
                         Save
