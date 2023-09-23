@@ -67,7 +67,7 @@ function Detail() {
         }
     }
 
-    const onHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onHandleChange = (event: { target: { name: string; value: string; }; }) => {
         const name = event.target.name;
         const value = event.target.value;
         setPost(values => ({ ...values, [name]: value }))
@@ -93,7 +93,8 @@ function Detail() {
                             id="text"
                             className="bg-gray-100 w-full focus:outline-none py-2 px-4 rounded"
                             rows={5}
-                            defaultValue={post.text}
+                            onChange={onHandleChange}
+                            value={post.text || ""}
                         ></textarea>
                     </div>
                     <div className="flex items-center justify-end gap-x-6 pr-8">
